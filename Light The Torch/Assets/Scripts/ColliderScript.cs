@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 //[ExecuteInEditMode]
 public class ColliderScript : MonoBehaviour
 {
 
     bool isGameOver = false;
-    bool shouldEndGame = false;
+    bool shouldEndGame = true;
     //[SerializeField]
     //Transform parent;
     public bool isTouchingAnotherBlock = false;
@@ -34,20 +35,18 @@ public class ColliderScript : MonoBehaviour
         if (other.gameObject.tag == "BlockDetect")
         {
             shouldEndGame = false;
-            Debug.Log(shouldEndGame);
             IsTouchingAnotherBlock = true;
         }
         else if (other.gameObject.tag == "Player")
         {
             PlayerTouchedMe = true;
-            other.gameObject.transform.SetParent(transform.parent);
             if (shouldEndGame)
             {
                 isGameOver = true;
-                Constants.GameOver();
+                GameOver();
             }
         }
-        else if(other.gameObject.tag != "BlockObject")
+        else
         {
             shouldEndGame = true;
         }
@@ -81,10 +80,12 @@ public class ColliderScript : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        //if (other.gameObject.tag == "DetectBlock")
             IsTouchingAnotherBlock = false;
     }
 
 
-
+    public static void GameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

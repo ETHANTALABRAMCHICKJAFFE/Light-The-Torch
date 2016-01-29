@@ -28,14 +28,7 @@ public class Player : MonoBehaviour {
 	void Update () {
         Debug.Log(Constants.deltaXBlock);
         Vector2 playerVelocity = new Vector2(playerVX * -playerDirection, playerVY);
-        Debug.Log(playerVelocity);
         GetComponent<Rigidbody2D>().velocity = playerVelocity;
-        /*
-        if (playerDirection == 1)
-            GetComponent<Animator>().SetBool("Left", true);
-        else
-            GetComponent<Animator>().SetBool("Left", false);*/
-        //Camera.main.transform.position = new Vector3(transform.position.x+3.91f, transform.position.y+7.76f,-10);
     }
 
 }
